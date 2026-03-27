@@ -288,8 +288,25 @@ img { display: block; max-width: 100%; }
 .lightbox-prev { left: 1rem; }
 .lightbox-next { right: 1rem; }
 
+.lightbox-suggest {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.6rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+.lightbox-suggest:hover {
+  color: var(--text);
+  border-color: var(--accent-dim);
+}
+
 /* --- Mobile lightbox --- */
 @media (max-width: 768px) {
+  .filter-bar { position: static; }
   .lightbox-content {
     flex-direction: column;
     gap: 1rem;

@@ -35,6 +35,7 @@ siteDescription: Scans of slides from the 70s-90s in the Northeastern Archives
   {% for photo in photos %}
     {% set kw = photo.Keywords | ensureArray %}
     <figure class="photo-card"
+      data-filename="{{ photo.FileName }}"
       data-tags="{{ kw | join('|||') }}"
       data-year="{{ photo.DateTimeOriginal | getYear }}"
       data-title="{{ photo.Title or '' }}"

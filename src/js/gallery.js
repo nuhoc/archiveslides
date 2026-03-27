@@ -73,6 +73,7 @@
   const lbCaption = $(".lightbox-caption");
   const lbDate = $(".lightbox-date");   // may be null if removed from layout
   const lbTags = $(".lightbox-tags");
+  const lbSuggest = $(".lightbox-suggest");
   const lbClose = $(".lightbox-close");
   const lbPrev = $(".lightbox-prev");
   const lbNext = $(".lightbox-next");
@@ -103,6 +104,25 @@
     lbTags.innerHTML = tags
       .map((t) => `<span class="tag-chip">${t}</span>`)
       .join("");
+
+    // Suggest-edit link
+    const filename = card.dataset.filename || "";
+    const currentTags = tags.join(", ");
+    const body = [
+      `**Photo:** ${filename}`,
+      ``,
+      `**Current caption:** ${card.dataset.caption || "_(none)_"}`,
+      `**Suggested caption:** `,
+      ``,
+      `**Current tags:** ${currentTags || "_(none)_"}`,
+      `**Suggested tags:** `,
+      ``,
+      `**Additional notes:**`,
+    ].join("\n");
+    lbSuggest.href =
+      `https://github.com/nuhoc/archiveslides/issues/new` +
+      `?title=${encodeURIComponent(`Suggestion: ${filename}`)}` +
+      `&body=${encodeURIComponent(body)}`;
 
     lightbox.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
