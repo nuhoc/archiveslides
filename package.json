@@ -1,0 +1,19 @@
+{
+  "name": "archiveslides",
+  "version": "1.0.0",
+  "description": "NUHOC Archive Slide Static Photo Site",
+  "main": "index.js",
+  "author": "Jonah Lefkoff",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy-img": "^6.0.4"
+  },
+  "scripts": {
+    "extract": "exiftool -json -Keywords -Caption-Abstract -DateTimeOriginal -Title -ImageWidth -ImageHeight -FileName images/full/*.jpg > _data/photos.json",
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve",
+    "start": "npm run extract && npm run serve"
+  }
+}

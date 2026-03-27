@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">{{ siteTitle or "Slide Archive" }}</h1>
+    {% if siteDescription %}
+      <p class="site-description">{{ siteDescription }}</p>
+    {% endif %}
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
+    <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="" />
+      <div class="lightbox-info">
+        <h2 class="lightbox-title"></h2>
+        <p class="lightbox-caption"></p>
+        <div class="lightbox-tags"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+---
+layout: layout.njk
+title: NUHOC Archive Slides
+siteTitle: NUHOC Archive Slides
+siteDescription: Scans of slides from the 70s-90s in the Northeastern Archives
+---
+
+{# --- Filter bar --- #}
+<div class="filter-bar">
+  <div class="filter-section">
+    <div class="search-wrap">
+      <input type="text" id="search" class="search-input" placeholder="Search titles, captions, tags&hellip;" />
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-group">
+      <label class="filter-label">Tags</label>
+      <div class="filter-pills" id="tag-filters">
+        <button class="pill active" data-tag="all">All</button>
+        {% for tag in photos | allTags %}
+          <button class="pill" data-tag="{{ tag }}">{{ tag }}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-status">
+    <span id="photo-count">{{ photos.length }}</span> photos
+  </div>
+</div>
+
+{# --- Gallery grid --- #}
+<div class="gallery" id="gallery">
+  {% for photo in photos %}
+    {% set kw = photo.Keywords | ensureArray %}
+    <figure class="photo-card"
+      data-tags="{{ kw | join('|||') }}"
+      data-year="{{ photo.DateTimeOriginal | getYear }}"
+      data-title="{{ photo.Title or '' }}"
+      data-caption="{{ photo['Caption-Abstract'] or '' }}"
+      data-date="{{ photo.DateTimeOriginal | formatDate }}"
+      data-ratio="{{ photo.ImageWidth / photo.ImageHeight }}"
+      style="--ratio: {{ photo.ImageWidth / photo.ImageHeight }};"
+    >
+      {% galleryImage photo.FileName, (photo['Caption-Abstract'] or photo.Title or 'Slide'), "photo-img" %}
+      <figcaption class="photo-meta">
+        {% if photo.Title %}<strong>{{ photo.Title }}</strong>{% endif %}
+      </figcaption>
+    </figure>
+  {% endfor %}
+</div>
